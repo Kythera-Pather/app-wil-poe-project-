@@ -72,8 +72,8 @@ More than three	15%
 
 ---
 
-+## detail of each screen +
-### +* App.tsx: The root component of the application. It initializes the StackNavigator from React Navigation, defining all possible routes and linking them to their respective screen components. It also configures the global header style for the app.
+## detail of each screen 
+###  App.tsx: The root component of the application. It initializes the StackNavigator from React Navigation, defining all possible routes and linking them to their respective screen components. It also configures the global header style for the app.
 ### +* HomeScreen.tsx: The main landing page and dashboard. It displays a welcome message to logged-in users or an "Account" dropdown for guests. The screen features an overview of the organization, key statistics, popular courses, and multiple calls-to-action to encourage user engagement.
 ### +* SignUpScreen.tsx: A form for new users to create an account. It captures the user's full name, email, and password, performs validation, and provides feedback on success or failure. +* LoginScreen.tsx: A form for existing users to sign in. It authenticates users based on email and password and, upon success, navigates them to the home screen with a personalized state.
 ###  +* AboutScreen.tsx: Provides a comprehensive overview of the "Empowering the Nation" organization. It details the founder's story, the company's mission, and showcases its impact through statistics and key values.
