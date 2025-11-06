@@ -17,6 +17,8 @@ interface Props {
 }
 
 const FeeCalculationResultsScreen: React.FC<Props> = ({ route, navigation }) => {
+  // All the data for this screen is received via route parameters
+  // from the CourseSelectionScreen.
   const {
     personalInfo,
     selectedCourses,
@@ -29,22 +31,32 @@ const FeeCalculationResultsScreen: React.FC<Props> = ({ route, navigation }) => 
     userName,
   } = route.params;
 
+  // State to manage the visibility of the invoice modal.
   const [isInvoiceVisible, setInvoiceVisible] = useState(false);
+  // State to hold the generated invoice reference number.
   const [referenceNumber, setReferenceNumber] = useState('');
 
+  /**
+   * Generates a simple, unique reference number for the enrollment invoice.
+   */
   const generateReferenceNumber = () => {
-    // Simple reference number generator
     const prefix = 'ETN-ENROLL';
     const timestamp = Date.now();
     return `${prefix}-${timestamp}`;
   };
 
+  /**
+   * Handles the "Enroll Now" action. It generates a reference number and shows the invoice modal.
+   */
   const handleEnroll = () => {
     const refNum = generateReferenceNumber();
     setReferenceNumber(refNum);
     setInvoiceVisible(true);
   };
 
+  /**
+   * Closes the invoice modal and shows a confirmation alert to the user.
+   */
   const handleCloseInvoice = () => {
     setInvoiceVisible(false);
     Alert.alert(
@@ -57,6 +69,7 @@ const FeeCalculationResultsScreen: React.FC<Props> = ({ route, navigation }) => 
 
   return (
     <View style={{ flex: 1 }}>
+      {/* The Invoice is rendered inside a Modal for a professional overlay effect. */}
       <Modal
         animationType="fade"
         transparent={true}
@@ -65,6 +78,7 @@ const FeeCalculationResultsScreen: React.FC<Props> = ({ route, navigation }) => 
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContainer}>
+            {/* The content of the invoice itself. */}
             <ScrollView contentContainerStyle={styles.modalScrollView}>
               <View style={styles.invoiceHeader}>
                 <Image source={require('../assets/LOGO.png')} style={styles.invoiceLogo} />
@@ -139,12 +153,14 @@ const FeeCalculationResultsScreen: React.FC<Props> = ({ route, navigation }) => 
       </Modal>
 
     <ScrollView style={styles.container}>
+      {/* This is the main view of the screen, summarizing the calculation results. */}
       {/* Main Content */}
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Fee Calculation Results</Text>
         
         {/* Content Container */}
         <View style={styles.contentContainer}>
+          {/* A card displaying the user's personal info for confirmation. */}
           {/* Personal Information */}
           <View style={styles.infoCard}>
             <Text style={styles.cardTitle}>Personal Information</Text>
@@ -162,6 +178,7 @@ const FeeCalculationResultsScreen: React.FC<Props> = ({ route, navigation }) => 
             </View>
           </View>
           
+          {/* A card listing the courses the user selected. */}
           {/* Selected Courses */}
           <View style={styles.infoCard}>
             <Text style={styles.cardTitle}>Selected Courses</Text>
@@ -173,6 +190,7 @@ const FeeCalculationResultsScreen: React.FC<Props> = ({ route, navigation }) => 
             ))}
           </View>
           
+          {/* A card providing a detailed breakdown of all costs. */}
           {/* Fee Breakdown */}
           <View style={styles.infoCard}>
             <Text style={styles.cardTitle}>Fee Breakdown</Text>
@@ -207,6 +225,7 @@ const FeeCalculationResultsScreen: React.FC<Props> = ({ route, navigation }) => 
             </View>
           </View>
 
+          {/* Action buttons to proceed with enrollment or go back to edit selections. */}
           {/* Action Buttons */}
           <View style={styles.buttonsContainer}>
             <Pressable

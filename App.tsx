@@ -20,13 +20,19 @@ import GardenMaintenanceCourseScreen from './screens/GardenMaintenanceCourseScre
 import FeeCalculationResultsScreen from './screens/FeeCalculationResultsScreen';
 import { View, Text } from 'react-native';
 
-// Placeholder for the missing screen
+// This is a placeholder component for a screen that hasn't been built yet.
+// It's a good practice to have placeholders like this to keep the navigation structure intact.
 const MeetTheTeamScreen = () => (
   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}><Text>Meet The Team Screen</Text></View>
 );
 
 
-// Define all the navigation routes and their params
+/**
+ * This is the heart of our navigation's type-safety.
+ * `RootStackParamList` defines all the screens available in our stack navigator
+ * and specifies the parameters (`params`) each screen expects to receive.
+ * Using `undefined` means the screen doesn't expect any parameters.
+ */
 export type RootStackParamList = {
   Home: { userName?: string } | undefined; // Can be undefined or an object with an optional userName
   Signup: undefined;
@@ -64,13 +70,20 @@ export type RootStackParamList = {
   GardenMaintenanceCourse: undefined;
 };
 
+// We create a stack navigator instance using our defined param list.
+// This ensures that when we call `navigation.navigate`, TypeScript will check
+// if we're using a valid screen name and providing the correct parameters.
 const Stack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
   return (
+    // The NavigationContainer is the root component that manages our navigation tree.
     <NavigationContainer>
+      {/* Stack.Navigator is what provides the stack-based navigation.
+          It allows users to move between screens and manages the navigation history. */}
       <Stack.Navigator
         initialRouteName="Home"
+        // These are global screen options, applying a consistent style to the header of every screen.
         screenOptions={{
           headerStyle: { backgroundColor: '#002a18' },
           headerTintColor: '#CFB53B',
@@ -78,6 +91,7 @@ const App = () => {
         }}
       >
         <Stack.Screen
+          // Each Stack.Screen defines a route in our navigator.
           name="Home"
           component={HomeScreen}
           options={{ title: 'Home' }}

@@ -16,15 +16,24 @@ type PressableState = { pressed: boolean; hovered?: boolean };
 const CourseSelectionScreen: React.FC = () => {
   const navigation = useNavigation<CourseSelectionScreenNavigationProp>();
   const route = useRoute<CourseSelectionScreenRouteProp>();
+
+  // State for the user's personal information form.
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
+
+  // State to keep track of which courses are selected. We store an array of course IDs.
   const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
+  // State to hold the running total price of selected courses.
   const [total, setTotal] = useState(0);
+  // State for filtering courses (though currently only used for pre-selection from other screens).
   const [filteredSixMonthCourses, setFilteredSixMonthCourses] = useState(sixMonthCourses);
   const [filteredSixWeekCourses, setFilteredSixWeekCourses] = useState(sixWeekCourses);
+  // State to manage the focused style on text inputs.
   const [focusedInput, setFocusedInput] = useState<string | null>(null);
 
+  // This effect checks if a `searchQuery` was passed via navigation params.
+  // It's used to pre-select a course if the user comes from a specific course page.
   useEffect(() => {
     const { searchQuery } = route.params || {};
     if (searchQuery) {
@@ -38,6 +47,10 @@ const CourseSelectionScreen: React.FC = () => {
     }
   }, [route.params]);
 
+  /**
+   * Toggles the selection of a course.
+   * Adds or removes the course ID from the `selectedCourses` array and updates the `total` price.
+   */
   const toggleCourseSelection = (courseId: string, price: number, isSelected: boolean) => {
     if (isSelected) {
       setSelectedCourses(selectedCourses.filter(id => id !== courseId));
@@ -48,8 +61,11 @@ const CourseSelectionScreen: React.FC = () => {
     }
   };
 
+  /**
+   * Handles the calculation logic when the user presses the "Calculate" button.
+   * It validates inputs, calculates discounts and VAT, and navigates to the results screen.
+   */
   const handleCalculate = () => {
-    // Validation for personal information
     if (!name.trim() || !phone.trim() || !email.trim()) {
       Alert.alert('Missing Information', 'Please fill in all your personal information.');
       return;
@@ -61,7 +77,7 @@ const CourseSelectionScreen: React.FC = () => {
       return;
     }
 
-    // Assumes a 10-digit South African number starting with 0
+    // Validates for a 10-digit South African number starting with 0.
     const phoneRegex = /^0\d{9}$/;
     if (!phoneRegex.test(phone)) {
       Alert.alert('Invalid Phone Number', 'Please enter a valid 10-digit phone number starting with 0.');
@@ -73,6 +89,7 @@ const CourseSelectionScreen: React.FC = () => {
       return;
     }
 
+    // --- Fee Calculation Logic ---
     const count = selectedCourses.length;
     let discount = 0;
     if (count === 2) discount = 0.05;
@@ -85,12 +102,15 @@ const CourseSelectionScreen: React.FC = () => {
     const vatAmount = discountedSubtotal * 0.15;
     const finalTotal = discountedSubtotal + vatAmount;
 
+    // We need to pass detailed course info to the next screen, not just IDs.
     const allCourses = [...sixMonthCourses, ...sixWeekCourses];
     const detailedSelectedCourses = selectedCourses.map(id => {
       const course = allCourses.find(c => c.id === id);
       return { id: course!.id, name: course!.title, price: course!.price };
     });
 
+    // Navigate to the results screen, passing all the calculated data and user info
+    // as route parameters.
     const { userName } = route.params || {};
     navigation.navigate('FeeCalculationResults', {
       personalInfo: { name, phone, email },
@@ -105,6 +125,7 @@ const CourseSelectionScreen: React.FC = () => {
     });
   };
 
+  // Placeholder for a future enrollment function.
   const handleEnroll = () => {
     if (selectedCourses.length === 0) {
       Alert.alert('Error', 'Please select at least one course before enrolling.');
@@ -126,7 +147,7 @@ const CourseSelectionScreen: React.FC = () => {
 
         {/* Form Container */}
         <View style={styles.formContainer}>
-          {/* Discount Information Section - MOVED TO TOP */}
+          {/* This section clearly explains the discount structure to the user. */}
           <View style={styles.discountSection}>
             <Text style={styles.discountSectionTitle}>Discount Information</Text>
             <Text style={styles.discountText}>
@@ -151,6 +172,7 @@ const CourseSelectionScreen: React.FC = () => {
             </Text>
           </View>
 
+          {/* Input fields for the user's personal details. */}
           {/* Personal Information */}
           <View style={styles.formSection}>
             <Text style={styles.formSectionTitle}>Your Information</Text>
@@ -183,6 +205,7 @@ const CourseSelectionScreen: React.FC = () => {
             />
           </View>
 
+          {/* A list of all available courses, rendered as custom checkboxes. */}
           {/* Six-Month Courses */}
           <View style={styles.formSection}>
             <Text style={styles.formSectionTitle}>Six-Month Courses (R1500 each)</Text>

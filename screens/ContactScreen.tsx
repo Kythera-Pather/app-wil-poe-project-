@@ -12,16 +12,21 @@ type PressableState = { pressed: boolean; hovered?: boolean };
 
 const ContactScreen: React.FC = () => {
   const navigation = useNavigation<ContactScreenNavigationProp>();
+  // State for managing the contact form inputs.
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [subject, setSubject] = useState('');
   const [message, setMessage] = useState('');
+
+  // State for the FAQ accordion functionality. `null` means all are closed.
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  // State for UI enhancements and feedback.
   const [focusedInput, setFocusedInput] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Data for the Frequently Asked Questions section.
   const faqs = [
     {
       question: 'How do I enroll in a course?',
@@ -43,9 +48,9 @@ const ContactScreen: React.FC = () => {
 
 
   const handleSubmit = () => {
-    setError(null);
+    setError(null); // Clear previous errors on a new submission.
 
-    // Validation
+    // --- Input Validation ---
     if (!name || !email || !subject || !message) {
       setError('Please fill in all required fields.');
       return;
@@ -68,7 +73,7 @@ const ContactScreen: React.FC = () => {
 
     setIsLoading(true);
 
-    // Simulate sending the message
+    // Simulate an API call to send the message.
     setTimeout(() => {
       setIsLoading(false);
 
@@ -84,22 +89,26 @@ const ContactScreen: React.FC = () => {
     }, 2000); // Simulate a 2-second network request
   };
 
+  // Helper function to open the location in the device's default map application.
   const openMap = () => {
     const address = '123 Education St, Johannesburg, South Africa';
     const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
     Linking.openURL(url).catch(err => Alert.alert('Error', 'Could not open maps.'));
   };
 
+  // Helper function to initiate a phone call.
   const callPhone = () => {
     Linking.openURL('tel:+27111234567').catch(err => Alert.alert('Error', 'Could not make a call.'));
   };
 
+  // Helper function to open the user's default email client.
   const sendEmail = () => {
     const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=info@empoweringthenation.org.za';
     Linking.openURL(gmailUrl).catch(err => Alert.alert('Error', 'Could not open email client.'));
   };
 
-  // Simple MapView component to avoid crashes
+  // This is a placeholder for a real map component (like react-native-maps).
+  // It provides a safe fallback with a button to open Google Maps.
   const SimpleMapView = () => {
     return (
       <View style={styles.mapPlaceholder}>
@@ -116,6 +125,7 @@ const ContactScreen: React.FC = () => {
 
   return (
     <View style={{ flex: 1 }}>
+    {/* KeyboardAvoidingView helps prevent the keyboard from covering input fields. */}
     <KeyboardAvoidingView
       style={{ flex: 1, backgroundColor: '#f8f9fa' }}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -131,6 +141,7 @@ const ContactScreen: React.FC = () => {
 
           {/* Contact Container */}
           <View style={styles.contactContainer}>
+            {/* The form for users to send a direct message. */}
             {/* Contact Form */}
             <View style={styles.contactForm}>
               <Text style={styles.contactFormTitle}>Send Us a Message</Text>
@@ -210,6 +221,7 @@ const ContactScreen: React.FC = () => {
               </Pressable>
             </View>
 
+            {/* A section displaying all the ways a user can get in touch. */}
             {/* Contact Information */}
             <View style={styles.contactInfo}>
               <Text style={styles.contactInfoTitle}>Contact Information</Text>
@@ -262,6 +274,7 @@ const ContactScreen: React.FC = () => {
             </View>
           </View>
 
+          {/* The map section with our placeholder component. */}
           {/* Map Section */}
           <View style={styles.mapSection}>
             <Text style={styles.sectionTitle}>Find Us</Text>
@@ -272,6 +285,7 @@ const ContactScreen: React.FC = () => {
           </View>
         </View>
 
+        {/* An accordion-style FAQ section to answer common questions. */}
         {/* FAQ Section */}
         <View style={styles.faqSection}>
           <Text style={styles.sectionTitle}>Frequently Asked Questions</Text>

@@ -18,6 +18,8 @@ interface Props {
 }
 
 const CourseOptionsScreen: React.FC<Props> = ({ navigation }) => {
+  // This screen acts as a simple navigation hub.
+  // It directs users to either the six-week or six-month course catalogue.
   return (
     <View style={{ flex: 1 }}>
     <ScrollView style={styles.container}>
@@ -26,6 +28,7 @@ const CourseOptionsScreen: React.FC<Props> = ({ navigation }) => {
         <Text style={styles.subtitle}>Choose a category to see the available courses.</Text>
       </View>
       <View style={styles.optionsContainer}>
+        {/* Card to navigate to the 6-Week Courses screen. */}
         <Pressable
           style={({ pressed, hovered }: PressableState) => [styles.optionCard, pressed && styles.cardPressed, hovered && styles.cardHovered]}
           onPress={() => navigation.navigate('SixWeekCourses')}
@@ -34,6 +37,7 @@ const CourseOptionsScreen: React.FC<Props> = ({ navigation }) => {
           <Text style={styles.optionTitle}>6-Week Courses</Text>
           <Text style={styles.optionDescription}>Focused short courses to quickly boost your skills.</Text>
         </Pressable>
+        {/* Card to navigate to the 6-Month Courses screen. */}
         <Pressable
           style={({ pressed, hovered }: PressableState) => [styles.optionCard, pressed && styles.cardPressed, hovered && styles.cardHovered]}
           onPress={() => navigation.navigate('SixMonthCourses')}

@@ -25,19 +25,24 @@ interface Props {
 }
 
 const LoginScreen: React.FC<Props> = ({ navigation }) => {
+  // State for handling form inputs
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  // State for handling UI feedback and enhancements
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [focusedInput, setFocusedInput] = useState<string | null>(null);
+
+  // This logic is for handling cases where a user is redirected to login from another screen.
   const { from, params } = (navigation.getState().routes.find(r => r.name === 'Login')?.params as any) || {};
 
   const handleLogin = async () => {
-    setError(null);
+    setError(null); // Clear previous errors
     setIsLoading(true);
 
-    // Basic Validation
+    // Simple client-side validation for a better user experience.
     if (!email || !password) {
       setError('Email and password are required.');
       setIsLoading(false);
@@ -45,20 +50,23 @@ const LoginScreen: React.FC<Props> = ({ navigation }) => {
     }
 
     try {
+      // We check our mock database for a user with the provided email.
       const user = await findUserByEmail(email);
 
+      // If the user doesn't exist or the password doesn't match, we show an error.
       if (!user || user.password !== password) {
         setError('Invalid email or password. Please try again.');
         setIsLoading(false);
         return;
       }
 
-      // If login is part of a flow (e.g., enrollment), go back to that screen.
+      // --- Smart Navigation ---
+      // If the user was sent here from another screen (like enrollment), we send them back there with their user info.
       if (from === 'FeeCalculationResults' && params) {
         navigation.navigate('FeeCalculationResults', { ...params, userName: user.fullName });
       } else {
-        // Otherwise, go to the Home screen.
-        navigation.replace('Home', { userName: user.fullName });
+        // Otherwise, we navigate them to the Home screen, passing the user's name as a parameter.
+        navigation.replace('Home', { userName: user.fullName }); // `replace` prevents going back to the login screen.
       }
     } catch (e) {
       setError('An unexpected error occurred. Please try again.');

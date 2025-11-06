@@ -14,6 +14,7 @@ type PressableState = { pressed: boolean };
 const AboutScreen: React.FC = () => {
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
+  // A helper function to safely open external links, like social media pages.
   const openLink = (url: string) => {
     Linking.openURL(url).catch(err => console.error("Couldn't load page", err));
   };
@@ -21,6 +22,7 @@ const AboutScreen: React.FC = () => {
   return (
     <View style={{ flex: 1 }}>
     <ScrollView style={styles.container}>
+      {/* This section provides a quick, visual summary of the organization's achievements. */}
       {/* Our Impact Section */}
       <View style={styles.impactSection}>
         <Text style={styles.heroTitle}>Our Impact</Text>
@@ -44,6 +46,7 @@ const AboutScreen: React.FC = () => {
           </View>
       </View>
 
+      {/* The main content area explaining the story and mission of the organization. */}
       {/* Main Content - Who We Are section */}
       <View style={styles.content}>
         <Text style={styles.title}>Who We Are</Text>
@@ -58,6 +61,7 @@ const AboutScreen: React.FC = () => {
           We believe that education and practical skills are the cornerstones of empowerment. Our mission is to provide accessible, high-quality training that equips individuals with the tools they need to secure employment, start businesses, and build self-sufficient lives. We are more than just a training center; we are a community dedicated to fostering growth, resilience, and hope across the nation.
         </Text>
 
+        {/* This section highlights the key value propositions of the organization. */}
         {/* Why Choose Us */}
         <View style={styles.features}>
           <Text style={styles.sectionTitle}>Why Choose Us</Text>
@@ -87,6 +91,7 @@ const AboutScreen: React.FC = () => {
         </View>
       </View>
 
+      {/* A simple footer with social media links. */}
       {/* Footer */}
       <View style={[styles.footer, { marginTop: 40 }]}>
         <View style={styles.footerGrid}>

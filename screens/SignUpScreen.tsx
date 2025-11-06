@@ -13,21 +13,27 @@ interface Props {
 }
 
 const SignupScreen: React.FC<Props> = ({ navigation }) => {
+  // State for handling form inputs
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+
+  // State for handling UI feedback (errors, loading indicators, success messages)
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  // State for UI enhancements (password visibility, input focus)
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
   const [focusedInput, setFocusedInput] = useState<string | null>(null);
 
   const handleSignUp = async () => {
-    setError(null);
+    setError(null); // Clear previous errors before a new attempt
 
-    // Basic Validation
+    // --- Input Validation ---
+    // It's crucial to validate user input on the client-side for a better user experience.
     if (!fullName || !email || !password || !confirmPassword) {
       setError('All fields are required.');
       return;
@@ -46,7 +52,8 @@ const SignupScreen: React.FC<Props> = ({ navigation }) => {
 
     setIsLoading(true);
 
-    // Check if user already exists
+    // --- Asynchronous Operations ---
+    // Check if a user with this email already exists in our mock database.
     const existingUser = await findUserByEmail(email);
     if (existingUser) {
       setError('An account with this email already exists.');
@@ -54,12 +61,12 @@ const SignupScreen: React.FC<Props> = ({ navigation }) => {
       return;
     }
 
-    // Create new user
+    // If the email is unique, proceed to create the new user.
     try {
       await createUser({ fullName, email, password });
       setIsSuccess(true);
-      // In a real app, you might auto-login the user here.
-      // For now, we'll show a success message and then navigate.
+      // After successful creation, we show a success message and then
+      // navigate the user to the Login screen.
       setTimeout(() => {
         navigation.replace('Login'); // Use replace to prevent going back to signup
       }, 2000); // Wait 2 seconds before navigating
@@ -70,6 +77,7 @@ const SignupScreen: React.FC<Props> = ({ navigation }) => {
     }
   };
 
+  // If the sign-up was successful, we render a success message instead of the form.
   if (isSuccess) {
     return (
       <View style={[styles.container, styles.successContainer]}>
@@ -80,6 +88,7 @@ const SignupScreen: React.FC<Props> = ({ navigation }) => {
     );
   }
 
+  // This is the main form render.
   return (
     <View style={{ flex: 1 }}>
     <View style={styles.container}>

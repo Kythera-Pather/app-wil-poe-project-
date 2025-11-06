@@ -1,13 +1,15 @@
 // This is a mock user database. In a real application, this data would
-// come from a secure backend server.
+// come from a secure backend server with a proper database (like PostgreSQL, MongoDB, etc.).
+// We're using this file to simulate user authentication without needing a backend.
 
 interface User {
   id: string;
   email: string;
-  password: string; // Storing passwords in plain text is insecure. Use hashing in a real app.
+  password: string; // WARNING: Storing passwords in plain text is highly insecure. In a real app, always hash and salt passwords.
   fullName: string;
 }
 
+// This array acts as our "users" table in the database.
 const users: User[] = [
   {
     id: '1',
@@ -23,18 +25,24 @@ const users: User[] = [
   },
 ];
 
-// Function to find a user by email. Simulates an async API call.
+/**
+ * Finds a user by their email address.
+ * This function simulates an asynchronous API call to a backend.
+ */
 export const findUserByEmail = async (email: string): Promise<User | undefined> => {
-  // Simulate network delay
+  // Simulate a network delay to mimic a real API request.
   await new Promise(resolve => setTimeout(resolve, 500));
   return users.find(user => user.email.toLowerCase() === email.toLowerCase());
 };
 
-// Function to create a new user. Simulates an async API call.
+/**
+ * Creates a new user and adds them to our mock database.
+ * This function also simulates an asynchronous API call.
+ */
 export const createUser = async (
   userData: Omit<User, 'id'>
 ): Promise<User> => {
-  // Simulate network delay
+  // Simulate a network delay.
   await new Promise(resolve => setTimeout(resolve, 500));
 
   const newUser: User = {

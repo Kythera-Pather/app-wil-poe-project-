@@ -16,17 +16,22 @@ interface Props {
 
 const HomeScreen: React.FC<Props> = ({ navigation }) => {
   const route = useRoute<HomeScreenRouteProp>();
-  const { userName } = route.params || {}; // Safely destructure userName
+  // We get the `userName` from the route's parameters.
+  // This is passed from the Login screen upon successful authentication.
+  const { userName } = route.params || {};
 
+  // This state controls the visibility of the "Account" dropdown menu for non-logged-in users.
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
   return (
     <View style={styles.wrapper}>
-      {/* Top Bar for Auth */}
+      {/* This top bar provides a different view depending on whether a user is logged in or not. */}
       <View style={styles.topBar}>
         {userName ? (
+          // If a user is logged in, we show a friendly welcome message.
           <Text style={styles.welcomeText}>Welcome, {userName}!</Text>
         ) : (
+          // If no user is logged in, we show an "Account" button with a dropdown for Login/Sign Up.
           <View>
             <Pressable style={styles.authButton} onPress={() => setDropdownVisible(!isDropdownVisible)}>
               <Text style={styles.authButtonText}>Account ▾</Text>
