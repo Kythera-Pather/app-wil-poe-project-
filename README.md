@@ -18,6 +18,22 @@ Empowering the Nation is a small-to-medium enterprise (SME) founded by Precious 
 - Had to have a calculator that calculates the discounds, vat and total amount at the end
 - Need to have a discription of each course and whats to be expected
 
+## Key Features
+
+*   **Course Catalogue**: Browse detailed descriptions of all available courses, including what to expect from each program.
+*   **Course Selection & Fee Calculator**: Users can select one or more courses and see the total cost calculated in real-time.
+*   **Automated Discounts**: A discount system is automatically applied based on the number of courses selected:
+    *   **5%** discount for 2 courses.
+    *   **10%** discount for 3 courses.
+    *   **15%** discount for 4 or more courses.
+*   **VAT Calculation**: All fees include a 15% VAT, which is calculated on the discounted subtotal.
+*   **User Authentication**: Secure sign-up and login functionality for a personalized experience.
+*   **Quote & Enrollment Request**: After calculating the fees, users can submit their information to receive a formal quote or begin the enrollment process.
+*   **Invoice Generation**: A simple invoice is displayed upon enrollment request, providing a summary and a unique reference number.
+*   **Contact Form**: A dedicated contact page with a form for inquiries and detailed contact information.
+*   **Responsive Design**: The UI is designed to be accessible and user-friendly across both web and mobile platforms.
+
+
 ## Discount Structure
 Number of Courses	Discount
 One course	0%
@@ -27,15 +43,17 @@ More than three	15%
 
 ## Courses Offered
 ### Six-Month Learnerships (R1500 each)
-- First Aid – Basic life support and emergency care.
-- Sewing – Garment tailoring, stitching, and alterations.
-- Landscaping – Designing and maintaining beautiful gardens.
-- Life Skills – Literacy, basic finance, and essential life management.
+
+*   **First Aid**: Comprehensive training in basic life support, CPR, and emergency care.
+*   **Sewing**: Learn garment tailoring, stitching, and alteration techniques.
+*   **Landscaping**: Master the art of designing and maintaining beautiful, sustainable gardens.
+*   **Life Skills**: Develop essential skills in literacy, basic finance, and personal management.
 
 ### Six-Week Short Courses (R750 each)
-- Child Minding – Infant and toddler care fundamentals.
-- Cooking – Preparing nutritious family meals.
-- Garden Maintenance – Pruning, watering, and plant propagation.
+
+*   **Child Minding**: Covers the fundamentals of infant and toddler care, safety, and development.
+*   **Cooking & Nutrition**: Learn to prepare nutritious and delicious family meals.
+*   **Garden Maintenance**: Focuses on practical skills like pruning, watering, and plant propagation.
 
 ## System Features
 - Homepage: Displays business overview and available courses.
@@ -44,3 +62,31 @@ More than three	15%
 - Contact Form: Enables potential customers to request information or a quote.
 - Responsive Design: Ensures accessibility across web and mobile platforms.
 - Invoice: A form that tell the user they be given a quote or message to pay
+
+## Technology Stack
+*   **Framework**: React Native
+*   **Language**: TypeScript
+*   **Navigation**: React Navigation (`@react-navigation/stack`)
+*   **Icons**: React Native Vector Icons (`react-native-vector-icons/FontAwesome`)
+*   **Platform**: Configured for cross-platform deployment (iOS/Android)
+
+## Project Structure
+
+The project follows a standard React Native structure. Key directories include:
+
+```
+/
+├── android/              # Android native project
+├── ios/                  # iOS native project
+├── assets/               # Images, logos, and other static assets
+└── screens/              # All application screens and components
+    ├── AboutScreen.tsx
+    ├── BottomNavBar.tsx
+    ├── ContactScreen.tsx
+    ├── CourseSelectionScreen.tsx
+    ├── FeeCalculationResultsScreen.tsx
+    ├── HomeScreen.tsx
+    ├── LoginScreen.tsx
+    ├── SignUpScreen.tsx
+    ├── ... (and other screen components)
+└── App.tsx               # Main application component with navigation stack
