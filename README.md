@@ -106,26 +106,6 @@ More than three	15%
 
 ---
 
-## Project Structure
-
-The project follows a standard React Native structure. Key directories include:
-
-```
-/
-├── android/              # Android native project
-├── ios/                  # iOS native project
-├── assets/               # Images, logos, and other static assets
-└── screens/              # All application screens and components
-    ├── AboutScreen.tsx
-    ├── BottomNavBar.tsx
-    ├── ContactScreen.tsx
-    ├── CourseSelectionScreen.tsx
-    ├── FeeCalculationResultsScreen.tsx
-    ├── HomeScreen.tsx
-    ├── LoginScreen.tsx
-    ├── SignUpScreen.tsx
-    ├── ... (and other screen components)
-    └── App.tsx               # Main application component with navigation stack
 
 ---
 
@@ -135,7 +115,7 @@ The project follows a standard React Native structure. Key directories include:
 ---
 
 
-Referencing 
+# Referencing 
 /*reference links to the pictures guys. Pinterest, 2025. Pin: 320881542220542951. [online] Available at: <https://za.pinterest.com/pin/320881542220542951/> [Accessed 1November 2025]
 Pinterest, 2025. Pin: 250794272993798934. [online] Available at: <https://za.pinterest.com/pin/250794272993798934/> [Accessed 1 November 2025]
 Pinterest, 2025. Pin: 684687949635079876. [online] Available at: <https://za.pinterest.com/pin/684687949635079876/> [Accessed 1 November 2025]
