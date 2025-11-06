@@ -1,0 +1,340 @@
+import React, { useState } from 'react';
+import { View, Text, ScrollView, StyleSheet, Pressable } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../App';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import BottomNavBar from '../screens/BottomNavBar';
+
+
+
+type CookingCourseScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'CookingCourse'>;
+type PressableState = { pressed: boolean; hovered?: boolean };
+
+const CookingCourseScreen: React.FC = () => {
+  const navigation = useNavigation<CookingCourseScreenNavigationProp>();
+
+  const handleEnroll = () => {
+    navigation.navigate('CourseSelection');
+  };
+
+  return (
+    <View style={{ flex: 1 }}>
+    <ScrollView style={styles.container}>
+      {/* Main Content */}
+      <View style={styles.section}>
+        {/* Overview Section */}
+        <View style={styles.contentSection}>
+          <Text style={styles.sectionTitle}>Program Overview</Text>
+          <Text style={styles.description}>
+            Our 6-week Cooking Life Skills Training Program is designed to teach essential culinary skills while promoting healthier eating habits and practical cooking techniques. 
+            Perfect for beginners and those looking to refine their kitchen skills, this program combines hands-on cooking experience with valuable life skills.
+          </Text>
+        </View>
+
+        {/* Course Highlights Grid */}
+        <View style={styles.contentSection}>
+          <Text style={styles.sectionTitle}>Course Highlights</Text>
+          <View style={styles.highlightsGrid}>
+            <Pressable style={({ hovered }: PressableState) => [styles.highlightItem, hovered && styles.highlightItemHover]}>
+              <Icon name="cutlery" size={40} color="#CFB53B" style={styles.highlightIcon} />
+              <Text style={styles.highlightTitle}>Kitchen Fundamentals</Text>
+              <Text style={styles.highlightDescription}>Master essential cooking tools and techniques</Text>
+            </Pressable>
+            <Pressable style={({ hovered }: PressableState) => [styles.highlightItem, hovered && styles.highlightItemHover]}>
+              <Icon name="calculator" size={40} color="#CFB53B" style={styles.highlightIcon} />
+              <Text style={styles.highlightTitle}>Meal Planning</Text>
+              <Text style={styles.highlightDescription}>Learn budgeting and meal preparation strategies</Text>
+            </Pressable>
+            <Pressable style={({ hovered }: PressableState) => [styles.highlightItem, hovered && styles.highlightItemHover]}>
+              <Icon name="leaf" size={40} color="#CFB53B" style={styles.highlightIcon} />
+              <Text style={styles.highlightTitle}>Healthy Cooking</Text>
+              <Text style={styles.highlightDescription}>Nutrition-focused cooking techniques</Text>
+            </Pressable>
+            <Pressable style={({ hovered }: PressableState) => [styles.highlightItem, hovered && styles.highlightItemHover]}>
+              <Icon name="certificate" size={40} color="#CFB53B" style={styles.highlightIcon} />
+              <Text style={styles.highlightTitle}>Certification</Text>
+              <Text style={styles.highlightDescription}>Nationally recognized qualification</Text>
+            </Pressable>
+          </View>
+        </View>
+
+       
+        
+        {/* Benefits Section */}
+        <View style={styles.contentSection}>
+          <Text style={styles.sectionTitle}>Why Choose Our Cooking Program</Text>
+          <View style={styles.benefitsGrid}>
+            <Pressable style={({ hovered }: PressableState) => [styles.benefitCard, hovered && styles.benefitCardHover]}>
+              <Icon name="user" size={50} color="#000000ff" style={styles.benefitIcon} />
+              <Text style={styles.benefitTitle}>Expert Chefs</Text>
+              <Text style={styles.benefitText}>Learn from experienced culinary professionals with years of industry experience and passion for teaching.</Text>
+            </Pressable>
+            <Pressable style={({ hovered }: PressableState) => [styles.benefitCard, hovered && styles.benefitCardHover]}>
+              <Icon name="handshake-o" size={50} color="#000000ff" style={styles.benefitIcon} />
+              <Text style={styles.benefitTitle}>Interactive Learning</Text>
+              <Text style={styles.benefitText}>Practical cooking exercises and real kitchen applications that build confidence and skill.</Text>
+            </Pressable>
+            <Pressable style={({ hovered }: PressableState) => [styles.benefitCard, hovered && styles.benefitCardHover]}>
+              <Icon name="user" size={50} color="#000000ff" style={styles.benefitIcon} />
+              <Text style={styles.benefitTitle}>Personalized Guidance</Text>
+              <Text style={styles.benefitText}>Individual feedback and support tailored to your cooking level and learning style.</Text>
+            </Pressable>
+            <Pressable style={({ hovered }: PressableState) => [styles.benefitCard, hovered && styles.benefitCardHover]}>
+              <Icon name="calendar" size={50} color="#000000ff" style={styles.benefitIcon} />
+              <Text style={styles.benefitTitle}>Flexible Scheduling</Text>
+              <Text style={styles.benefitText}>Evening and weekend classes available to accommodate your work and personal commitments.</Text>
+            </Pressable>
+          </View>
+        </View>
+
+        {/* Target Audience */}
+        <View style={styles.contentSection}>
+          <Text style={styles.sectionTitle}>Who Should Enroll</Text>
+          <Text style={styles.audienceText}>
+            Our program is suitable for anyone looking to improve their cooking skills, whether for personal enjoyment, health, or entertaining. 
+            Discover the joy of cooking and enhance your life skills!
+          </Text>
+          <Text style={styles.audienceText}>
+            Join us to become a confident home cook and impress your family and friends!
+          </Text>
+        </View>
+
+        {/* CTA Section */}
+        <View style={styles.ctaSection}>
+          <Pressable
+            style={({ hovered }: PressableState) => [styles.enrollButton, hovered && styles.enrollButtonHover]}
+            onPress={handleEnroll}
+          >
+            <Text style={styles.enrollButtonText}>ENROLL NOW - R750</Text>
+          </Pressable>
+          <Text style={styles.ctaSubtext}>Limited spots available for next intake</Text>
+        </View>
+      </View>
+    </ScrollView>
+    <BottomNavBar />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffffff',
+    marginBottom: 60, // Space for BottomNavBar
+  },
+  section: {
+    padding: 20,
+    alignItems: 'center',
+  },
+  contentSection: {
+    marginBottom: 40,
+    width: '100%',
+    maxWidth: 1200,
+    alignItems: 'center',
+  },
+  sectionTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#000000ff',
+    marginBottom: 30,
+    paddingBottom: 10,
+    borderBottomWidth: 4,
+    borderBottomColor: '#CFB53B',
+    alignSelf: 'center',
+    textAlign: 'center',
+    width: '50%',
+  },
+  description: {
+    fontSize: 18,
+    lineHeight: 28,
+    color: '#002a18',
+    marginBottom: 20,
+    textAlign: 'center',
+    maxWidth: 800,
+  },
+  // Course Highlights
+  highlightsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    rowGap: 20,
+    gap: 30,
+    width: '100%',
+  },
+  highlightItem: {
+    backgroundColor: '#004225',
+    flex: 1,
+    padding: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+    textAlign: 'center',
+    borderTopWidth: 4,
+    borderTopColor: '#121212',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 3,
+    minWidth: 250,
+    maxWidth: 260,
+    height: 230,
+  },
+  highlightItemHover: {
+    transform: [{ translateY: -5 }],
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
+    borderTopColor: '#CFB53B',
+  },
+  highlightIcon: {
+    marginBottom: 20,
+  },
+  highlightTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#CFB53B',
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  highlightDescription: {
+    fontSize: 16,
+    color: '#CFB53B',
+    textAlign: 'center',
+    lineHeight: 22,
+  },
+  // Curriculum
+  curriculumContainer: {
+    width: '100%',
+    maxWidth: 800,
+    alignItems: 'center',
+  },
+  curriculumItem: {
+    backgroundColor: '#fff',
+    padding: 25,
+    borderRadius: 8,
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+    borderLeftWidth: 4,
+    borderLeftColor: '#004225',
+    width: '100%',
+  },
+  curriculumTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#004225',
+    marginBottom: 10,
+    textAlign: 'center',
+  },
+  curriculumDescription: {
+    fontSize: 16,
+    color: '#002a18',
+    marginBottom: 15,
+    fontStyle: 'italic',
+    textAlign: 'center',
+  },
+  curriculumPoints: {
+    marginLeft: 10,
+  },
+  curriculumPoint: {
+    fontSize: 16,
+    color: '#002a18',
+    marginBottom: 8,
+    lineHeight: 24,
+  },
+  // Benefits Section
+  benefitsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    gap: 30,
+    width: '100%',
+  },
+  benefitCard: {
+    backgroundColor: '#D9D9D9',
+    flex: 1,
+    padding: 30,
+    borderRadius: 8,
+    alignItems: 'center',
+    textAlign: 'center',
+    borderTopWidth: 4,
+    borderTopColor: '#121212',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+    height: 320,
+    minWidth: 250,
+    maxWidth: 280,
+  },
+  benefitCardHover: {
+    transform: [{ translateY: -5}],
+    shadowOpacity: 0.5,
+    boxShadow: '0 5px 10px rgba(0, 0, 0, 0.1)',
+    borderTopColor: '#CFB53B',
+    backgroundColor: '#c4c4c4',
+  },
+  benefitIcon: {
+    marginBottom: 25,
+  },
+  benefitTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#004225',
+    marginBottom: 15,
+    textAlign: 'center',
+  },
+  benefitText: {
+    fontSize: 16,
+    color: '#004225',
+    textAlign: 'center',
+    lineHeight: 24,
+  },
+  // Target Audience
+  audienceText: {
+    fontSize: 18,
+    lineHeight: 28,
+    color: '#002a18',
+    marginBottom: 20,
+    textAlign: 'center',
+    maxWidth: 800,
+  },
+  // CTA Section
+  ctaSection: {
+    backgroundColor: '#f8f9fa',
+    padding: 40,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 30,
+    width: '100%',
+    maxWidth: 800,
+  },
+  enrollButton: {
+    backgroundColor: '#004225',
+    paddingVertical: 18,
+    paddingHorizontal: 40,
+    borderRadius: 4,
+    alignItems: 'center',
+    marginBottom: 20,
+    minWidth: 300,
+    height: 60,
+  },
+  enrollButtonHover: {
+    backgroundColor: '#002a18',
+  },
+  enrollButtonText: {
+    color: '#fff',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  ctaSubtext: {
+    fontSize: 16,
+    color: '#6c757d',
+    textAlign: 'center',
+  },
+});
+
+export default CookingCourseScreen;
