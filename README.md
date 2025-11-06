@@ -1,6 +1,10 @@
 # Empowering the Nation
 ## Web and Mobile App Project – README Overview
-
+- E-TECH TITIANS
+- KYTHERA
+- HAYLEE
+- JADENE
+- YASHNA
 ---
 
 # Overview of the WIL POE
