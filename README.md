@@ -70,6 +70,21 @@ More than three	15%
 *   **Icons**: React Native Vector Icons (`react-native-vector-icons/FontAwesome`)
 *   **Platform**: Configured for cross-platform deployment (iOS/Android)
 
+---
+
++## detail of each screen +
+### +* App.tsx: The root component of the application. It initializes the StackNavigator from React Navigation, defining all possible routes and linking them to their respective screen components. It also configures the global header style for the app.
+### +* HomeScreen.tsx: The main landing page and dashboard. It displays a welcome message to logged-in users or an "Account" dropdown for guests. The screen features an overview of the organization, key statistics, popular courses, and multiple calls-to-action to encourage user engagement.
+### +* SignUpScreen.tsx: A form for new users to create an account. It captures the user's full name, email, and password, performs validation, and provides feedback on success or failure. +* LoginScreen.tsx: A form for existing users to sign in. It authenticates users based on email and password and, upon success, navigates them to the home screen with a personalized state.
+###  +* AboutScreen.tsx: Provides a comprehensive overview of the "Empowering the Nation" organization. It details the founder's story, the company's mission, and showcases its impact through statistics and key values.
+### +* ContactScreen.tsx: A multi-functional contact page. It includes a form for sending inquiries, detailed contact information (address, phone, email), office hours, an interactive map link, and a Frequently Asked Questions (FAQ) section to address common queries. ### +* CourseOptionsScreen.tsx: Acts as a simple navigation hub for the course catalogue. It presents users with two clear choices: exploring the 6-Week Short Courses or the 6-Month Learnerships.
+### +* SixMonthCoursesScreen.tsx / SixWeekCoursesScreen.tsx: These screens serve as catalogues, displaying all available courses within their respective categories. Each course is presented in a detailed card format with an image, description, price, and a button to view more information. ### +* FirstAidCourseScreen.tsx (and other individual course screens): Each course has its own dedicated detail page. These screens provide an in-depth program overview, curriculum highlights, benefits, target audience, and a direct call-to-action to enroll.
+### +* CourseSelectionScreen.tsx: A crucial interactive screen where users can select one or more courses to generate a quote. It includes fields for personal information, a complete list of selectable courses, and a button to trigger the fee calculation.
+### +* FeeCalculationResultsScreen.tsx: Displays a detailed breakdown of the costs after a user submits their course selection. It clearly lists the subtotal, any applicable discounts, VAT, and the final total. This screen also contains the "Enroll Now" button, which generates a modal invoice.
+### +* BottomNavBar.tsx: A persistent navigation component that appears at the bottom of most screens. It provides quick and easy access to the main sections of the app: Home, Courses, About, and Contact. +
+
+---
+
 ## Project Structure
 
 The project follows a standard React Native structure. Key directories include:
@@ -93,14 +108,3 @@ The project follows a standard React Native structure. Key directories include:
 
 ---
 
-
-+## detail of each screen +
-### +* App.tsx: The root component of the application. It initializes the StackNavigator from React Navigation, defining all possible routes and linking them to their respective screen components. It also configures the global header style for the app.
-### +* HomeScreen.tsx: The main landing page and dashboard. It displays a welcome message to logged-in users or an "Account" dropdown for guests. The screen features an overview of the organization, key statistics, popular courses, and multiple calls-to-action to encourage user engagement.
-### +* SignUpScreen.tsx: A form for new users to create an account. It captures the user's full name, email, and password, performs validation, and provides feedback on success or failure. +* LoginScreen.tsx: A form for existing users to sign in. It authenticates users based on email and password and, upon success, navigates them to the home screen with a personalized state.
-###  +* AboutScreen.tsx: Provides a comprehensive overview of the "Empowering the Nation" organization. It details the founder's story, the company's mission, and showcases its impact through statistics and key values.
-### +* ContactScreen.tsx: A multi-functional contact page. It includes a form for sending inquiries, detailed contact information (address, phone, email), office hours, an interactive map link, and a Frequently Asked Questions (FAQ) section to address common queries. ### +* CourseOptionsScreen.tsx: Acts as a simple navigation hub for the course catalogue. It presents users with two clear choices: exploring the 6-Week Short Courses or the 6-Month Learnerships.
-### +* SixMonthCoursesScreen.tsx / SixWeekCoursesScreen.tsx: These screens serve as catalogues, displaying all available courses within their respective categories. Each course is presented in a detailed card format with an image, description, price, and a button to view more information. ### +* FirstAidCourseScreen.tsx (and other individual course screens): Each course has its own dedicated detail page. These screens provide an in-depth program overview, curriculum highlights, benefits, target audience, and a direct call-to-action to enroll.
-### +* CourseSelectionScreen.tsx: A crucial interactive screen where users can select one or more courses to generate a quote. It includes fields for personal information, a complete list of selectable courses, and a button to trigger the fee calculation.
-### +* FeeCalculationResultsScreen.tsx: Displays a detailed breakdown of the costs after a user submits their course selection. It clearly lists the subtotal, any applicable discounts, VAT, and the final total. This screen also contains the "Enroll Now" button, which generates a modal invoice.
-### +* BottomNavBar.tsx: A persistent navigation component that appears at the bottom of most screens. It provides quick and easy access to the main sections of the app: Home, Courses, About, and Contact. +
