@@ -88,8 +88,11 @@ The project follows a standard React Native structure. Key directories include:
     ├── HomeScreen.tsx
     ├── LoginScreen.tsx
     ├── SignUpScreen.tsx
+    ├── ... (and other screen components)
+    └── App.tsx               # Main application component with navigation stack
 
 ---
+
 
 +## detail of each screen +
 ### +* App.tsx: The root component of the application. It initializes the StackNavigator from React Navigation, defining all possible routes and linking them to their respective screen components. It also configures the global header style for the app.
@@ -101,6 +104,3 @@ The project follows a standard React Native structure. Key directories include:
 ### +* CourseSelectionScreen.tsx: A crucial interactive screen where users can select one or more courses to generate a quote. It includes fields for personal information, a complete list of selectable courses, and a button to trigger the fee calculation.
 ### +* FeeCalculationResultsScreen.tsx: Displays a detailed breakdown of the costs after a user submits their course selection. It clearly lists the subtotal, any applicable discounts, VAT, and the final total. This screen also contains the "Enroll Now" button, which generates a modal invoice.
 ### +* BottomNavBar.tsx: A persistent navigation component that appears at the bottom of most screens. It provides quick and easy access to the main sections of the app: Home, Courses, About, and Contact. +
-   
-    ├── ... (and other screen components)
-└── App.tsx               # Main application component with navigation stack
